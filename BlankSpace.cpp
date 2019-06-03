@@ -17,6 +17,7 @@ BlankSpace on the board.
 BlankSpace::BlankSpace() : Space()
 {
     token = ' ';
+    type = 'B';
 }
 
 

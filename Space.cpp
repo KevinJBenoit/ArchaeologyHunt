@@ -22,6 +22,7 @@ Space::Space()
     right = nullptr;
     content = nullptr;
     token = 'N';
+    type = 'N';
 }
 
 /***************************************
@@ -110,4 +111,14 @@ to a 'blank' space on the board when printed
 void Space::removeToken()
 {
     token = ' ';
+}
+
+
+/****************************************
+Getter function for this Space's
+type variable.
+****************************************/
+char Space::getType()
+{
+    return type;
 }

@@ -10,6 +10,7 @@
 #include <iostream>
 #include "EmptySpace.hpp"
 #include "BlankSpace.hpp"
+#include "OrnamentSpace.hpp"
 #include "inputValidate.hpp"
 #include <algorithm>
 
@@ -25,16 +26,22 @@ Game::Game()
     timer = 50;
 
     //generate the ratio of spaces
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < 10; i++)
     {
         //Credit: cplusplus.com/forum/general/157242/
         nodes.emplace_back(new EmptySpace());
+    }
+    for (int i = 0; i < 10; i++)
+    {
+        //Credit: cplusplus.com/forum/general/157242/
+        nodes.emplace_back(new OrnamentSpace());
     }
     for (int i = 0; i < 80; i++)
     {
         nodes.emplace_back(new BlankSpace());
     }
     
+
     //shuffle the spaces
     std::random_shuffle(nodes.begin(), nodes.end());
     
@@ -153,7 +160,7 @@ void Game::movePlayer()
         //if not a BlankSpace, generate event
         if (spaceType != ' ')
         {
-            dig();
+            dig(player->getType());
         }
 
         player->setToken('A');
@@ -171,7 +178,7 @@ void Game::movePlayer()
         //if not a BlankSpace, generate event
         if (spaceType != ' ')
         {
-            dig();
+            dig(player->getType());
         }
 
         player->setToken('A');
@@ -188,7 +195,7 @@ void Game::movePlayer()
         //if not a BlankSpace, generate event
         if (spaceType != ' ')
         {
-            dig();
+            dig(player->getType());
         }
 
         player->setToken('A');
@@ -205,7 +212,7 @@ void Game::movePlayer()
         //if not a BlankSpace, generate event
         if (spaceType != ' ')
         {
-            dig();
+            dig(player->getType());
         }
 
         player->setToken('A');
@@ -366,7 +373,20 @@ Function for resolving Space Events.
 Calls: Space::spaceEvent()
 Returns: none
 ******************************************/
-void Game::dig()
+void Game::dig(char type)
 {
     player->spaceEvent();
+
+    //if EmptySpace
+    if (type == 'E')
+    {
+        return;
+    }
+
+    //if OrnamentSpace
+    else if (type == 'O')
+    {
+        //add to player's inventory
+    }
+
 }

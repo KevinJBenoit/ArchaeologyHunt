@@ -14,7 +14,6 @@
 #define GAME_HPP
 
 #include "Space.hpp"
-#include "PlayerSpace.hpp"
 #include <vector>
 #include <memory>
 
@@ -37,7 +36,7 @@ class Game
         void setup();
         void round();
         void movePlayer();
-        void dig();
+        void dig(char type);
 
         void createBoard();
         void printBoard();
