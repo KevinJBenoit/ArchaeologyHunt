@@ -12,6 +12,7 @@ FinalProjectVS.sln
 FinalProjectVS.vcxproj
 FinalProjectVS.vcxproj.filters
 FinalProjectVS.vcxproj.user
+Debug/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
