@@ -5,12 +5,14 @@
 ** Description: The implementation file for the Game class.
 *****************************************************************************/
 
+#define ROUNDS 10
 
 #include "Game.hpp"
 #include <iostream>
 #include "EmptySpace.hpp"
 #include "BlankSpace.hpp"
 #include "OrnamentSpace.hpp"
+#include "Gem.hpp"
 #include "inputValidate.hpp"
 #include <algorithm>
 
@@ -21,9 +23,11 @@ variables
 **********************************/
 Game::Game()
 {
+    user = Player();
+
     directionsArray[0] = 'w', directionsArray[1] = 'a';
     directionsArray[2] = 's', directionsArray[3] = 'd';
-    timer = 50;
+    timer = ROUNDS;
 
     //generate the ratio of spaces
     for (int i = 0; i < 10; i++)
@@ -58,6 +62,7 @@ Game::~Game()
     {
         delete nodes.at(i);
     }
+
 }
 
 
@@ -129,11 +134,14 @@ void Game::round()
     //move token and generate space event
     movePlayer();
 
-
-
-
+    //print score
+    printScore();
+    
+    
+    //print board
     printBoard();
-
+    
+    timer--;
 }
 
 /*************************************
@@ -231,6 +239,7 @@ void Game::createBoard()
 
     /*************************************************
     First, create a series of Linear Linked Lists
+    Credit: geeksforgeeks.org/construct-a-linked-list-from-2d-matrix-iterative-approach/
     *************************************************/
 
     for (int i = 0; i < 10; i++)
@@ -358,6 +367,26 @@ void Game::printBoard()
 
 
 /*****************************************
+Function that outputs the current score
+of the user
+*****************************************/
+void Game::printScore()
+{
+    std::cout << "Score: " << user.getScore() << std::endl;
+    //print the backpack
+
+    std::cout << "Backpack: ";
+    if (user.getBackpack().size() > 0)
+    {
+        for (int i = 0; i < user.getBackpack().size(); i++)
+        {
+            std::cout << user.getBackpack().at(i)->getName() << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+/*****************************************
 Getter function for accessing the member
 variable timer
 Returns: int timer
@@ -384,9 +413,12 @@ void Game::dig(char type)
     }
 
     //if OrnamentSpace
-    else if (type == 'O')
+    else if (type == 'O') 
     {
         //add to player's inventory
+        user.addToBackpack(new Gem());
+        //increase the player's score
+        user.adjustScore(100);
     }
 
 }

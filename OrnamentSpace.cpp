@@ -7,6 +7,7 @@
 *****************************************************************************/
 
 #include "OrnamentSpace.hpp"
+#include "Gem.hpp"
 #include <iostream>
 
 /***********************************
@@ -17,6 +18,7 @@ OrnamentSpace::OrnamentSpace() : Space()
 {
     token = 'x';
     type = 'O';
+    content = new Gem(); //****************************************************************potential memory leak??????
 }
 
 

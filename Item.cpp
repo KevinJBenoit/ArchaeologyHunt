@@ -14,7 +14,7 @@ Item.
 ***********************************/
 Item::Item()
 {
-    price = -100;
+    weight = -100;
     name = "InvalidItem";
 }
 
@@ -22,9 +22,9 @@ Item::Item()
 Getter function for accessing this Item's
 price.
 **************************************/
-int Item::getPrice()
+int Item::getWeight()
 {
-    return price;
+    return weight;
 }
 
 

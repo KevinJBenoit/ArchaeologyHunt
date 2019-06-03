@@ -122,3 +122,12 @@ char Space::getType()
 {
     return type;
 }
+
+
+/**************************************
+Getter function for this Space's content
+***************************************/
+Item* Space::getContent()
+{
+    return content;
+}

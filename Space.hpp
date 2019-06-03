@@ -40,6 +40,8 @@ class Space
         virtual void setToken(char tokenIn);
         virtual char getType();
 
+        virtual Item* getContent();
+
 
         Space();
         virtual ~Space();
