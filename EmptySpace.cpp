@@ -25,6 +25,6 @@ decides to dig this space on the board.
 *************************************/
 void EmptySpace::spaceEvent()
 {
-    std::cout << "This is an EmptySpace, nothing found here." << std::endl
+    std::cout << "After hours of digging, you find nothing here." << std::endl
         << std::endl;
 }

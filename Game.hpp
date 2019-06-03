@@ -37,11 +37,11 @@ class Game
         void setup();
         void round();
         void movePlayer();
+        void dig();
 
         void createBoard();
         void printBoard();
 
         int getTimer();
 };
-
 #endif

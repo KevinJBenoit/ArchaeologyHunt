@@ -119,6 +119,7 @@ Returns: none
 ***************************************/
 void Game::round()
 {
+    //move token and generate space event
     movePlayer();
 
 
@@ -129,21 +130,32 @@ void Game::round()
 }
 
 /*************************************
-Function that runs one round of the
-game. Player is able move around the board
-through validated input
+Function that moves the player 1 space. 
+Player is able move around the board
+except past the borders.
 Calls: inputValidateCharArray()
 Returns: none
 ***************************************/
 void Game::movePlayer()
 {
     char direction = inputValidateCharArray(directionsArray, 4);
+    char spaceType = ' ';
 
     //move up
     if (direction == 'w' && player->getTop() != nullptr)
     {
         player->setToken(' ');
         player = player->getTop();
+
+        //check for a space event
+        spaceType = player->getToken();
+
+        //if not a BlankSpace, generate event
+        if (spaceType != ' ')
+        {
+            dig();
+        }
+
         player->setToken('A');
     }
 
@@ -152,6 +164,16 @@ void Game::movePlayer()
     {
         player->setToken(' ');
         player = player->getBottom();
+
+        //check for a space event
+        spaceType = player->getToken();
+
+        //if not a BlankSpace, generate event
+        if (spaceType != ' ')
+        {
+            dig();
+        }
+
         player->setToken('A');
     }
     //move left
@@ -159,6 +181,16 @@ void Game::movePlayer()
     {
         player->setToken(' ');
         player = player->getLeft();
+
+        //check for a space event
+        spaceType = player->getToken();
+
+        //if not a BlankSpace, generate event
+        if (spaceType != ' ')
+        {
+            dig();
+        }
+
         player->setToken('A');
     }
     //move right
@@ -166,6 +198,16 @@ void Game::movePlayer()
     {
         player->setToken(' ');
         player = player->getRight();
+
+        //check for a space event
+        spaceType = player->getToken();
+
+        //if not a BlankSpace, generate event
+        if (spaceType != ' ')
+        {
+            dig();
+        }
+
         player->setToken('A');
     }
 }
@@ -271,7 +313,6 @@ void Game::createBoard()
 
 
 
-
 /*************************************
 Function that outputs to the console the
 current state of the 2D DoublyLinked List/
@@ -317,4 +358,15 @@ Returns: int timer
 int Game::getTimer()
 {
     return timer;
+}
+
+
+/*****************************************
+Function for resolving Space Events.
+Calls: Space::spaceEvent()
+Returns: none
+******************************************/
+void Game::dig()
+{
+    player->spaceEvent();
 }
