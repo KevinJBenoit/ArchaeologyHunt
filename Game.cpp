@@ -245,7 +245,7 @@ void Game::createBoard()
     link the top pointers
     exclude the top row
     *************************/
-    for (int i = 9; i > 1; i--)
+    for (int i = 9; i > 0; i--)
     {
         cursorSpace = head[i];
         //cursor that follows the bottom one
