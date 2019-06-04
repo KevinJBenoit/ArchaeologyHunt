@@ -5,14 +5,16 @@
 ** Description: The implementation file for the Game class.
 *****************************************************************************/
 
-#define ROUNDS 20
+#define ROUNDS 30
 
 #include "Game.hpp"
 #include <iostream>
 #include "EmptySpace.hpp"
 #include "BlankSpace.hpp"
+#include "ArtifactSpace.hpp"
 #include "OrnamentSpace.hpp"
 #include "Gem.hpp"
+#include "ArtifactItem.hpp"
 #include "inputValidate.hpp"
 #include <algorithm>
 
@@ -40,11 +42,13 @@ Game::Game()
         //Credit: cplusplus.com/forum/general/157242/
         nodes.emplace_back(new OrnamentSpace());
     }
-    for (int i = 0; i < 80; i++)
+    for (int i = 0; i < 79; i++)
     {
         nodes.emplace_back(new BlankSpace());
     }
-    
+    //generate the winning space
+    nodes.emplace_back(new ArtifactSpace());
+
 
     //shuffle the spaces
     std::random_shuffle(nodes.begin(), nodes.end());
@@ -376,11 +380,13 @@ void Game::printScore()
     //print the backpack
 
     std::cout << "Backpack: ";
+    std::cout << "Encumbrance: " << user.getHeaviness() << "/10"
+        << std::endl;
     if (user.getBackpack().size() > 0)
     {
         for (int i = 0; i < static_cast<int>(user.getBackpack().size()); i++)
         {
-            std::cout << user.getBackpack().at(i)->getName() << " ";
+            std::cout << user.getBackpack().at(i)->getName() << " | ";
         }
     }
     std::cout << std::endl;
@@ -416,9 +422,15 @@ void Game::dig(char type)
     else if (type == 'O') 
     {
         //add to player's inventory
-        user.addToBackpack(new Gem());
+        user.addToBackpack(new Gem()); //memory leak?????
         //increase the player's score
         user.adjustScore(100);
+    }
+
+    //if ArtifactSpace
+    else if (type == 'P')
+    {
+        user.addToBackpack(new ArtifactItem());
     }
 
 }

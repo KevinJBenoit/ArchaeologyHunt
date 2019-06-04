@@ -20,6 +20,7 @@ class Player
     private:
         std::vector<Item*> backpack;
         int score;
+        int heaviness;
 
     public:
         Player();
@@ -28,6 +29,7 @@ class Player
         int getScore();
         void setScore(int scoreIn);
         void adjustScore(int valueIn);
+        int getHeaviness();
 
         std::vector<Item*> getBackpack();
         void addToBackpack(Item* thing);

@@ -17,6 +17,7 @@ object
 Player::Player()
 {
     score = 0;
+    heaviness = 0;
 }
 
 /*************************************
@@ -66,8 +67,22 @@ std::vector<Item*> Player::getBackpack()
 
 
 
-
+/************************************
+Function for adding an Item to the Players
+inventory container. Will also increase the
+heaviness. IMPLEMENT WEIGHT CHECK HERE??????????????????????????????????????????????????????????????
+*************************************/
 void Player::addToBackpack(Item* thing)
 {
     backpack.push_back(thing);
+    heaviness += thing->getWeight();
+}
+
+/*************************************
+Getter function for accessing the Player's
+heaviness.
+**************************************/
+int Player::getHeaviness()
+{
+    return heaviness;
 }
