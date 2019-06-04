@@ -11,6 +11,7 @@
 #include <iostream>
 #include "EmptySpace.hpp"
 #include "BlankSpace.hpp"
+#include "ExitSpace.hpp"
 #include "ArtifactSpace.hpp"
 #include "OrnamentSpace.hpp"
 #include "Gem.hpp"
@@ -32,7 +33,7 @@ Game::Game()
     timer = ROUNDS;
 
     //generate the ratio of spaces
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < 10; i++)
     {
         //Credit: cplusplus.com/forum/general/157242/
         nodes.emplace_back(new EmptySpace());
@@ -53,6 +54,9 @@ Game::Game()
     //shuffle the spaces
     std::random_shuffle(nodes.begin(), nodes.end());
     
+    //place the ExitSpace at the end so it isn't used in board generation
+    nodes.emplace_back(new ExitSpace());
+
     gameOver = false;
     endConditions = 0;
 }
@@ -139,6 +143,12 @@ void Game::round()
 {
     //move token and generate space event
     movePlayer();
+
+    if (gameOver)
+    {
+        printBoard();
+        return;
+    }
 
     //print score
     printScore();
@@ -331,6 +341,12 @@ void Game::createBoard()
             topCursor = topCursor->getRight();
         }
     }
+
+    /**************************
+    Link the Exit Space in the
+    border
+    ***************************/
+    head[0]->setTop(nodes.at(vectorIncrementor));
 }
 
 
@@ -346,7 +362,15 @@ void Game::printBoard()
 
     for (int i = 0; i < 12; i++)
     {
-        std::cout << '-';
+        if (i == 1)
+        {
+            std::cout << nodes.at(100)->getToken(); //if changing board size fix this*********************************
+        }
+        else
+        {
+            std::cout << '-';
+        }
+        
     }
     std::cout << std::endl;
     
@@ -465,5 +489,11 @@ void Game::dig(char type)
     {
         user.addToBackpack(new ArtifactItem());
         endConditions++;
+    }
+
+    //if ExitSpace
+    else if (type == 'G')
+    {
+        gameOver = true;
     }
 }

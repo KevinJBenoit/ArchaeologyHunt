@@ -48,15 +48,22 @@ int main()
         {
             finalMenu2_2(); //neutral end some score/gems
         }
-        finalMenu2_1(); //neutral end no score/gems
+        else
+        {
+            finalMenu2_1(); //neutral end no score/gems
+        }
+        
     }
     else if (ending == 1)
     {
-        finalMenu3(); //win end
-    }
-    else if (ending == 2)
-    {
-        finalMenu4();//true win end
+        if (game1.getScore() > 500)
+        {
+            finalMenu4();//true win end
+        }
+        else
+        {
+            finalMenu3(); //win end
+        }   
     }
 
 
