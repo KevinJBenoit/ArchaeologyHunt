@@ -18,7 +18,7 @@ Gem::Gem() : Item()
 {
     weight = 1;
     value = 100;
-    name = "gem";
+    name = "Gem";
 }
 
 /**********************************
