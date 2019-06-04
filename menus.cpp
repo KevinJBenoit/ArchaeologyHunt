@@ -11,68 +11,50 @@
 #include "inputValidate.hpp"
 #include "menus.hpp"
 
-/**********************************************
-Menu for the user to pick Player 1 and Player
-2's team size.
-Takes in a player number as a parameter.
-Calls inputValidateIntegerAndRange()
-Returns an intger from 1 - 40
-***********************************************/
-int startMenu()
-{
-    int size;
-    std::cout << "Player , please enter the number of rounds " << std::endl;
-    size = inputValidateIntegerAndRange(1, 40);
-    std::cout << std::endl << std::endl;
-
-    return size;
-}
-
 
 /**************************************
-
+Menu for outputing the text for the 
+losing scenario
 ***************************************/
 
-void subMenu1()
+void finalMenu1()
 {
-
+    std::cout << "Game Over - lose;" << std::endl;
 }
 
 /**************************************
-
+Menu for outputing the text for the
+neutral scenario
 ***************************************/
-void subMenu2()
+void finalMenu2_1()
 {
-
+    std::cout << "Game Over - nuetral no money" << std::endl;
 }
 
-/****************************************************
-
-*****************************************************/
-void subMenu3()
+/**************************************
+Menu for outputing the text for the
+neutral scenario
+***************************************/
+void finalMenu2_2()
 {
+    std::cout << "Game Over - nuetral some money" << std::endl;
+}
 
+/***************************************
+Menu for outputing the text for the
+win scenario
+****************************************/
+void finalMenu3()
+{
+    std::cout << "Game Over - win;" << std::endl;
 }
 
 
 /********************************************
-
+Menu for outputing the text for the
+ true win scenario
 ********************************************/
-bool finalMenu()
+void finalMenu4()
 {
-    int option;
-    std::cout << "1. Play Again?" << std::endl;
-    std::cout << "2. Quit" << std::endl;
-    std::cout << "Option: ";
-    option = inputValidateIntegerAndRange(1, 2);
-
-    if (option == 1)
-    {
-        return true;
-    }
-
-    else
-    {
-        return false;
-    }
+    std::cout << "Game Over - true win;" << std::endl;
 }

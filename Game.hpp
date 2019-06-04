@@ -31,6 +31,9 @@ class Game
         Space * player;
         Player user;
 
+        bool gameOver;
+        int endConditions;
+
     public:
         Game();
         ~Game();
@@ -45,5 +48,8 @@ class Game
 
         int getTimer();
         void printScore();
+        int getEndConditions();
+        bool getGameOver();
+        int getScore();
 };
 #endif

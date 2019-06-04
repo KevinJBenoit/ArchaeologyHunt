@@ -15,10 +15,13 @@
 *****************************************************************************/
 
 #include "Game.hpp"
+#include "menus.hpp"
 #include "inputValidate.hpp"
 
 int main()
 {
+    bool endGame = false;
+    int ending;
 
     Game game1 = Game();
 
@@ -27,9 +30,34 @@ int main()
     do
     {
         game1.round();
-    } while (game1.getTimer() > 0);
+        endGame = game1.getGameOver();
+
+    } while (game1.getTimer() > 0 && !endGame);
 
 
+    //check for which endConditions
+    ending = game1.getEndConditions();
+
+    if (ending < 0)
+    {
+        finalMenu1(); //losing end
+    }
+    else if (ending == 0)
+    {
+        if (game1.getScore() > 0)
+        {
+            finalMenu2_2(); //neutral end some score/gems
+        }
+        finalMenu2_1(); //neutral end no score/gems
+    }
+    else if (ending == 1)
+    {
+        finalMenu3(); //win end
+    }
+    else if (ending == 2)
+    {
+        finalMenu4();//true win end
+    }
 
 
     system("pause"); //*********************************************************REMMOVE

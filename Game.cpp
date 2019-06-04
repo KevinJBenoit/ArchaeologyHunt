@@ -53,6 +53,8 @@ Game::Game()
     //shuffle the spaces
     std::random_shuffle(nodes.begin(), nodes.end());
     
+    gameOver = false;
+    endConditions = 0;
 }
 
 
@@ -402,6 +404,37 @@ int Game::getTimer()
     return timer;
 }
 
+/*****************************************
+Getter function for accessing the
+endConditions vairable
+Returns: int endConditions
+******************************************/
+int Game::getEndConditions()
+{
+    return endConditions;
+}
+
+/*****************************************
+Getter function for accessing the gameOver
+variable
+Returns: bool gameOver
+******************************************/
+bool Game::getGameOver()
+{
+    return gameOver;
+}
+
+
+/*****************************************
+Getter function for accessing the Player's
+score variable
+Returns: int score
+******************************************/
+int Game::getScore()
+{
+    return user.getScore();
+}
+
 
 /*****************************************
 Function for resolving Space Events.
@@ -431,6 +464,6 @@ void Game::dig(char type)
     else if (type == 'P')
     {
         user.addToBackpack(new ArtifactItem());
+        endConditions++;
     }
-
 }

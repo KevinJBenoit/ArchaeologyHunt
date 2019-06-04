@@ -12,10 +12,10 @@
 
 #include "Game.hpp"
 
-int startMenu();
-void subMenu1();
-void subMenu2();
-void subMenu3();
-bool finalMenu();
+void finalMenu1();
+void finalMenu2_1();
+void finalMenu2_2();
+void finalMenu3();
+void finalMenu4();
 
 #endif
