@@ -18,7 +18,7 @@ OrnamentSpace::OrnamentSpace() : Space()
 {
     token = 'x';
     type = 'O';
-    content = new Gem(); //****************************************************************potential memory leak??????
+    //content = new Gem(); //****************************************************************potential memory leak??????
 }
 
 

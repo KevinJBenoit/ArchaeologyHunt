@@ -20,7 +20,7 @@ Space::Space()
     bottom = nullptr;
     left = nullptr;
     right = nullptr;
-    content = nullptr;
+    //content = nullptr;
     token = 'N';
     type = 'N';
 }
@@ -127,7 +127,7 @@ char Space::getType()
 /**************************************
 Getter function for this Space's content
 ***************************************/
-Item* Space::getContent()
-{
-    return content;
-}
+//Item* Space::getContent()
+//{
+//    return content;
+//}

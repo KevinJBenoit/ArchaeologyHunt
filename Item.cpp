@@ -18,6 +18,11 @@ Item::Item()
     name = "InvalidItem";
 }
 
+
+Item::~Item()
+{
+}
+
 /*************************************
 Getter function for accessing this Item's
 price.

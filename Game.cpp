@@ -5,7 +5,7 @@
 ** Description: The implementation file for the Game class.
 *****************************************************************************/
 
-#define ROUNDS 10
+#define ROUNDS 20
 
 #include "Game.hpp"
 #include <iostream>
@@ -30,7 +30,7 @@ Game::Game()
     timer = ROUNDS;
 
     //generate the ratio of spaces
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 20; i++)
     {
         //Credit: cplusplus.com/forum/general/157242/
         nodes.emplace_back(new EmptySpace());
@@ -378,12 +378,12 @@ void Game::printScore()
     std::cout << "Backpack: ";
     if (user.getBackpack().size() > 0)
     {
-        for (int i = 0; i < user.getBackpack().size(); i++)
+        for (int i = 0; i < static_cast<int>(user.getBackpack().size()); i++)
         {
             std::cout << user.getBackpack().at(i)->getName() << " ";
         }
-        std::cout << std::endl;
     }
+    std::cout << std::endl;
 }
 
 /*****************************************

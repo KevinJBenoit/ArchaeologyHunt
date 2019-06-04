@@ -24,6 +24,8 @@ class Item
         virtual std::string getName();
 
         Item();
+        virtual ~Item();
+
 };
 
 #endif
