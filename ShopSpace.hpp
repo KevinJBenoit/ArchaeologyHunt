@@ -14,7 +14,6 @@
 
 class ShopSpace : public Space
 {
-
     public:
         ShopSpace();
 

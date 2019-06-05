@@ -30,9 +30,11 @@ class Game
 
         Space * player;
         Player user;
+        Space * shop;
 
         bool gameOver;
         int endConditions;
+        bool shopOpen = false;
 
     public:
         Game();

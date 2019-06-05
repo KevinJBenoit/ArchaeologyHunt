@@ -8,10 +8,13 @@
 #define ROUNDS 30
 
 #include "Game.hpp"
+#include "menus.hpp"
 #include <iostream>
 #include "EmptySpace.hpp"
 #include "BlankSpace.hpp"
 #include "ExitSpace.hpp"
+#include "ShopSpace.hpp"
+#include "MummySpace.hpp"
 #include "ArtifactSpace.hpp"
 #include "OrnamentSpace.hpp"
 #include "Gem.hpp"
@@ -38,17 +41,23 @@ Game::Game()
         //Credit: cplusplus.com/forum/general/157242/
         nodes.emplace_back(new EmptySpace());
     }
+
     for (int i = 0; i < 10; i++)
     {
         //Credit: cplusplus.com/forum/general/157242/
         nodes.emplace_back(new OrnamentSpace());
     }
-    for (int i = 0; i < 79; i++)
+
+    for (int i = 0; i < 78; i++)
     {
         nodes.emplace_back(new BlankSpace());
     }
+
     //generate the winning space
     nodes.emplace_back(new ArtifactSpace());
+
+    //generate the losing space
+    nodes.emplace_back(new MummySpace());
 
 
     //shuffle the spaces
@@ -56,9 +65,12 @@ Game::Game()
     
     //place the ExitSpace at the end so it isn't used in board generation
     nodes.emplace_back(new ExitSpace());
+    //place a ShopSpace
+    nodes.emplace_back(new ShopSpace());
 
     gameOver = false;
     endConditions = 0;
+    shopOpen = true;
 }
 
 
@@ -141,6 +153,7 @@ Returns: none
 ***************************************/
 void Game::round()
 {
+    std::cout << std::endl << std::endl << std::endl << std::endl;
     //move token and generate space event
     movePlayer();
 
@@ -152,11 +165,12 @@ void Game::round()
 
     //print score
     printScore();
-    
-    
+
+
     //print board
     printBoard();
     
+    std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
     timer--;
 }
 
@@ -343,10 +357,17 @@ void Game::createBoard()
     }
 
     /**************************
-    Link the Exit Space in the
-    border
+    Link the ExitSpace and
+    ShopSpacein the border
     ***************************/
     head[0]->setTop(nodes.at(vectorIncrementor));
+    vectorIncrementor++;
+
+    head[9]->setBottom(nodes.at(vectorIncrementor));
+    cursorSpace = head[9]->getBottom();
+    cursorSpace->setTop(head[9]);
+    shop = cursorSpace;
+    vectorIncrementor++;
 }
 
 
@@ -364,17 +385,16 @@ void Game::printBoard()
     {
         if (i == 1)
         {
-            std::cout << nodes.at(100)->getToken(); //if changing board size fix this*********************************
+            std::cout << 'E';
         }
         else
         {
             std::cout << '-';
         }
-        
     }
     std::cout << std::endl;
     
-    //print the conents
+    //print the contents
     for (int i = 0; i < 10; i++)
     {
         cursorSpace = head[i];
@@ -390,7 +410,27 @@ void Game::printBoard()
     //print the floor
     for (int i = 0; i < 12; i++)
     {
-        std::cout << '-';
+        //printing the shop open
+        if (i == 1 && shopOpen)
+        {
+            switch (shopOpen)  
+            {
+            case true: std::cout << nodes.at(101)->getToken(); //if changing board size fix this*********************************
+                break;
+            case false: std::cout << '-';
+            }
+       
+        }
+        //if the player is standing on the ShopSpace
+        else if (i == 1 && shop->getToken() == 'A')
+        {
+            std::cout << 'A';
+        }
+        //print the shop closed
+        else
+        {
+            std::cout << '-';
+        }
     }
     std::cout << std::endl;
 }
@@ -479,7 +519,7 @@ void Game::dig(char type)
     else if (type == 'O') 
     {
         //add to player's inventory
-        user.addToBackpack(new Gem()); //memory leak?????
+        user.addToBackpack(new Gem());
         //increase the player's score
         user.adjustScore(100);
     }
@@ -491,9 +531,47 @@ void Game::dig(char type)
         endConditions++;
     }
 
+    //if MummySpace
+    else if (type == 'M')
+    {
+        gameOver = true;
+        endConditions -= 100;
+    }
+
     //if ExitSpace
     else if (type == 'G')
     {
         gameOver = true;
+    }
+
+    //if ShopSpace
+    else if (type == 'S')
+    {
+
+        int option = itemMenu();
+        //menu function
+        if (option == 1)
+        {
+            //purchase The Eye of Horace
+        }
+        else if (option == 2)
+        {
+            //purchase The Map
+        }
+        else if (option == 3)
+        {
+            //purchase The Tent
+        }
+        else if (option == 4)
+        {
+            std::cout << "Fine, keep your money. ";
+        }
+
+        std::cout << "Just so you know, the door locks on your way out! MUAHAHA"
+            << std::endl << std::endl;
+
+        //"lock" the Shop
+        shopOpen = false;
+        head[9]->setBottom(nullptr);
     }
 }

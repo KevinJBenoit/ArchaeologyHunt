@@ -12,7 +12,8 @@
 
 /********************************
 Default constructor. Creates
-the ExitSpace object
+the ExitSpace object.
+Inherits from Space
 ********************************/
 ExitSpace::ExitSpace() : Space()
 {
