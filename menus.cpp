@@ -13,6 +13,35 @@
 
 
 /**************************************
+Menu to prompt the user to purchase an
+Item from the ShopSpace
+Calls:inputValidateIntegerAndRange()
+Returns int option
+***************************************/
+int itemMenu()
+{
+    std::cout << "1. The Eye of Horace - 300 points" << std::endl;
+    std::cout << "The Eye will reveal where the Mummy is buried." << std::endl;
+    std::cout << "______________________________________________" << std::endl;
+    std::cout << "2. A Map of the Area - 200 points" << std::endl;
+    std::cout << "The Map will remove some of the false digging sites"
+        << std::endl;
+    std::cout << "______________________________________________" << std::endl;
+    std::cout << "3. A Tent - 100 points" << std::endl;
+    std::cout << "The Tent will add some additional steps to the timer"
+        << std::endl;
+    std::cout << "______________________________________________" << std::endl;
+    std::cout << "4. Nothing" << std::endl;
+    std::cout << "Keep your money, it may be the difference to achieve "
+        << "your true goal!" << std::endl;
+    std::cout << "______________________________________________" << std::endl;
+
+    int option = inputValidateIntegerAndRange(1, 4);
+    return option;
+}
+
+
+/**************************************
 Menu for outputing the text for the 
 losing scenario
 ***************************************/
