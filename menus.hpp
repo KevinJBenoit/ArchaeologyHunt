@@ -12,6 +12,8 @@
 
 #include "Game.hpp"
 
+int itemMenu();
+
 void finalMenu1();
 void finalMenu2_1();
 void finalMenu2_2();
