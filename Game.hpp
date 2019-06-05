@@ -13,8 +13,8 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
+#include "Player.hpp"
 #include "Space.hpp"
-#include "PlayerSpace.hpp"
 #include <vector>
 #include <memory>
 
@@ -29,6 +29,10 @@ class Game
         std::vector<Space *> nodes;
 
         Space * player;
+        Player user;
+
+        bool gameOver;
+        int endConditions;
 
     public:
         Game();
@@ -37,11 +41,15 @@ class Game
         void setup();
         void round();
         void movePlayer();
+        void dig(char type);
 
         void createBoard();
         void printBoard();
 
         int getTimer();
+        void printScore();
+        int getEndConditions();
+        bool getGameOver();
+        int getScore();
 };
-
 #endif

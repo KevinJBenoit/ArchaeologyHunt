@@ -5,11 +5,17 @@
 ** Description: The implementation file for the Game class.
 *****************************************************************************/
 
+#define ROUNDS 30
 
 #include "Game.hpp"
 #include <iostream>
 #include "EmptySpace.hpp"
 #include "BlankSpace.hpp"
+#include "ExitSpace.hpp"
+#include "ArtifactSpace.hpp"
+#include "OrnamentSpace.hpp"
+#include "Gem.hpp"
+#include "ArtifactItem.hpp"
 #include "inputValidate.hpp"
 #include <algorithm>
 
@@ -20,24 +26,39 @@ variables
 **********************************/
 Game::Game()
 {
+    user = Player();
+
     directionsArray[0] = 'w', directionsArray[1] = 'a';
     directionsArray[2] = 's', directionsArray[3] = 'd';
-    timer = 50;
+    timer = ROUNDS;
 
     //generate the ratio of spaces
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < 10; i++)
     {
         //Credit: cplusplus.com/forum/general/157242/
         nodes.emplace_back(new EmptySpace());
     }
-    for (int i = 0; i < 80; i++)
+    for (int i = 0; i < 10; i++)
+    {
+        //Credit: cplusplus.com/forum/general/157242/
+        nodes.emplace_back(new OrnamentSpace());
+    }
+    for (int i = 0; i < 79; i++)
     {
         nodes.emplace_back(new BlankSpace());
     }
-    
+    //generate the winning space
+    nodes.emplace_back(new ArtifactSpace());
+
+
     //shuffle the spaces
     std::random_shuffle(nodes.begin(), nodes.end());
     
+    //place the ExitSpace at the end so it isn't used in board generation
+    nodes.emplace_back(new ExitSpace());
+
+    gameOver = false;
+    endConditions = 0;
 }
 
 
@@ -51,6 +72,7 @@ Game::~Game()
     {
         delete nodes.at(i);
     }
+
 }
 
 
@@ -119,31 +141,52 @@ Returns: none
 ***************************************/
 void Game::round()
 {
+    //move token and generate space event
     movePlayer();
 
+    if (gameOver)
+    {
+        printBoard();
+        return;
+    }
 
-
-
+    //print score
+    printScore();
+    
+    
+    //print board
     printBoard();
-
+    
+    timer--;
 }
 
 /*************************************
-Function that runs one round of the
-game. Player is able move around the board
-through validated input
+Function that moves the player 1 space. 
+Player is able move around the board
+except past the borders.
 Calls: inputValidateCharArray()
 Returns: none
 ***************************************/
 void Game::movePlayer()
 {
     char direction = inputValidateCharArray(directionsArray, 4);
+    char spaceType = ' ';
 
     //move up
     if (direction == 'w' && player->getTop() != nullptr)
     {
         player->setToken(' ');
         player = player->getTop();
+
+        //check for a space event
+        spaceType = player->getToken();
+
+        //if not a BlankSpace, generate event
+        if (spaceType != ' ')
+        {
+            dig(player->getType());
+        }
+
         player->setToken('A');
     }
 
@@ -152,6 +195,16 @@ void Game::movePlayer()
     {
         player->setToken(' ');
         player = player->getBottom();
+
+        //check for a space event
+        spaceType = player->getToken();
+
+        //if not a BlankSpace, generate event
+        if (spaceType != ' ')
+        {
+            dig(player->getType());
+        }
+
         player->setToken('A');
     }
     //move left
@@ -159,6 +212,16 @@ void Game::movePlayer()
     {
         player->setToken(' ');
         player = player->getLeft();
+
+        //check for a space event
+        spaceType = player->getToken();
+
+        //if not a BlankSpace, generate event
+        if (spaceType != ' ')
+        {
+            dig(player->getType());
+        }
+
         player->setToken('A');
     }
     //move right
@@ -166,6 +229,16 @@ void Game::movePlayer()
     {
         player->setToken(' ');
         player = player->getRight();
+
+        //check for a space event
+        spaceType = player->getToken();
+
+        //if not a BlankSpace, generate event
+        if (spaceType != ' ')
+        {
+            dig(player->getType());
+        }
+
         player->setToken('A');
     }
 }
@@ -182,6 +255,7 @@ void Game::createBoard()
 
     /*************************************************
     First, create a series of Linear Linked Lists
+    Credit: geeksforgeeks.org/construct-a-linked-list-from-2d-matrix-iterative-approach/
     *************************************************/
 
     for (int i = 0; i < 10; i++)
@@ -267,8 +341,13 @@ void Game::createBoard()
             topCursor = topCursor->getRight();
         }
     }
-}
 
+    /**************************
+    Link the Exit Space in the
+    border
+    ***************************/
+    head[0]->setTop(nodes.at(vectorIncrementor));
+}
 
 
 
@@ -283,7 +362,15 @@ void Game::printBoard()
 
     for (int i = 0; i < 12; i++)
     {
-        std::cout << '-';
+        if (i == 1)
+        {
+            std::cout << nodes.at(100)->getToken(); //if changing board size fix this*********************************
+        }
+        else
+        {
+            std::cout << '-';
+        }
+        
     }
     std::cout << std::endl;
     
@@ -310,6 +397,28 @@ void Game::printBoard()
 
 
 /*****************************************
+Function that outputs the current score
+of the user
+*****************************************/
+void Game::printScore()
+{
+    std::cout << "Score: " << user.getScore() << std::endl;
+    //print the backpack
+
+    std::cout << "Backpack: ";
+    std::cout << "Encumbrance: " << user.getHeaviness() << "/10"
+        << std::endl;
+    if (user.getBackpack().size() > 0)
+    {
+        for (int i = 0; i < static_cast<int>(user.getBackpack().size()); i++)
+        {
+            std::cout << user.getBackpack().at(i)->getName() << " | ";
+        }
+    }
+    std::cout << std::endl;
+}
+
+/*****************************************
 Getter function for accessing the member
 variable timer
 Returns: int timer
@@ -317,4 +426,74 @@ Returns: int timer
 int Game::getTimer()
 {
     return timer;
+}
+
+/*****************************************
+Getter function for accessing the
+endConditions vairable
+Returns: int endConditions
+******************************************/
+int Game::getEndConditions()
+{
+    return endConditions;
+}
+
+/*****************************************
+Getter function for accessing the gameOver
+variable
+Returns: bool gameOver
+******************************************/
+bool Game::getGameOver()
+{
+    return gameOver;
+}
+
+
+/*****************************************
+Getter function for accessing the Player's
+score variable
+Returns: int score
+******************************************/
+int Game::getScore()
+{
+    return user.getScore();
+}
+
+
+/*****************************************
+Function for resolving Space Events.
+Calls: Space::spaceEvent()
+Returns: none
+******************************************/
+void Game::dig(char type)
+{
+    player->spaceEvent();
+
+    //if EmptySpace
+    if (type == 'E')
+    {
+        return;
+    }
+
+    //if OrnamentSpace
+    else if (type == 'O') 
+    {
+        //add to player's inventory
+        user.addToBackpack(new Gem()); //memory leak?????
+        //increase the player's score
+        user.adjustScore(100);
+    }
+
+    //if ArtifactSpace
+    else if (type == 'P')
+    {
+        user.addToBackpack(new ArtifactItem());
+        endConditions++;
+    }
+
+    //if ExitSpace
+    else if (type == 'G')
+    {
+        gameOver = true;
+    }
 }

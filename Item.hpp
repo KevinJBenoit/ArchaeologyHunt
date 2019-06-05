@@ -15,15 +15,17 @@
 
 class Item
 {
-    private:
-        int price;
+    protected:
+        int weight;
         std::string name;
 
     public:
-        virtual int getPrice();
+        virtual int getWeight();
         virtual std::string getName();
 
         Item();
+        virtual ~Item();
+
 };
 
 #endif

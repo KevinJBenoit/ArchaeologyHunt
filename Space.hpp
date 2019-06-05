@@ -23,8 +23,9 @@ class Space
         Space * bottom;
         Space * left;
         Space * right;
-        Item * content;
+        //Item * content;
         char token;
+        char type;
     
     public:
         virtual Space * getTop();
@@ -37,6 +38,10 @@ class Space
         virtual void setRight(Space * rightIn);
         virtual char getToken();
         virtual void setToken(char tokenIn);
+        virtual char getType();
+
+        //virtual Item* getContent();
+
 
         Space();
         virtual ~Space();

@@ -20,8 +20,9 @@ Space::Space()
     bottom = nullptr;
     left = nullptr;
     right = nullptr;
-    content = nullptr;
+    //content = nullptr;
     token = 'N';
+    type = 'N';
 }
 
 /***************************************
@@ -111,3 +112,22 @@ void Space::removeToken()
 {
     token = ' ';
 }
+
+
+/****************************************
+Getter function for this Space's
+type variable.
+****************************************/
+char Space::getType()
+{
+    return type;
+}
+
+
+/**************************************
+Getter function for this Space's content
+***************************************/
+//Item* Space::getContent()
+//{
+//    return content;
+//}
