@@ -14,6 +14,7 @@
 #include "BlankSpace.hpp"
 #include "ExitSpace.hpp"
 #include "ShopSpace.hpp"
+#include "MummySpace.hpp"
 #include "ArtifactSpace.hpp"
 #include "OrnamentSpace.hpp"
 #include "Gem.hpp"
@@ -40,17 +41,23 @@ Game::Game()
         //Credit: cplusplus.com/forum/general/157242/
         nodes.emplace_back(new EmptySpace());
     }
+
     for (int i = 0; i < 10; i++)
     {
         //Credit: cplusplus.com/forum/general/157242/
         nodes.emplace_back(new OrnamentSpace());
     }
-    for (int i = 0; i < 79; i++)
+
+    for (int i = 0; i < 78; i++)
     {
         nodes.emplace_back(new BlankSpace());
     }
+
     //generate the winning space
     nodes.emplace_back(new ArtifactSpace());
+
+    //generate the losing space
+    nodes.emplace_back(new MummySpace());
 
 
     //shuffle the spaces
@@ -146,7 +153,7 @@ Returns: none
 ***************************************/
 void Game::round()
 {
-    
+    std::cout << std::endl << std::endl << std::endl << std::endl;
     //move token and generate space event
     movePlayer();
 
@@ -163,6 +170,7 @@ void Game::round()
     //print board
     printBoard();
     
+    std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
     timer--;
 }
 
@@ -386,7 +394,7 @@ void Game::printBoard()
     }
     std::cout << std::endl;
     
-    //print the conents
+    //print the contents
     for (int i = 0; i < 10; i++)
     {
         cursorSpace = head[i];
@@ -402,7 +410,7 @@ void Game::printBoard()
     //print the floor
     for (int i = 0; i < 12; i++)
     {
-        //printing the shop
+        //printing the shop open
         if (i == 1 && shopOpen)
         {
             switch (shopOpen)  
@@ -413,10 +421,12 @@ void Game::printBoard()
             }
        
         }
+        //if the player is standing on the ShopSpace
         else if (i == 1 && shop->getToken() == 'A')
         {
             std::cout << 'A';
         }
+        //print the shop closed
         else
         {
             std::cout << '-';
@@ -519,6 +529,13 @@ void Game::dig(char type)
     {
         user.addToBackpack(new ArtifactItem());
         endConditions++;
+    }
+
+    //if MummySpace
+    else if (type == 'M')
+    {
+        gameOver = true;
+        endConditions -= 100;
     }
 
     //if ExitSpace
