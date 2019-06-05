@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-#pragma once
-=======
+
 /******************************************************************************
 ** Program name: MummySpace.hpp
 ** Author: Kevin Benoit
@@ -23,4 +21,3 @@ class MummySpace : public Space
         void spaceEvent();
 };
 #endif
->>>>>>> feat/MummySpace

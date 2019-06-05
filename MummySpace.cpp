@@ -39,5 +39,4 @@ void MummySpace::spaceEvent()
         << std::endl;
     std::cout << "Mummy arms reach out and pull you through the opening, and the "
         << "door slams shut behind you" << std::endl;
-
 }
