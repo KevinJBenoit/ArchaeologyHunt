@@ -21,6 +21,7 @@ class Player
         std::vector<Item*> backpack;
         int score;
         int heaviness;
+        int gemCount;
 
     public:
         Player();
@@ -33,6 +34,8 @@ class Player
 
         std::vector<Item*> getBackpack();
         void addToBackpack(Item* thing);
+        void dropGem();
+        int getGemCount();
 };
 
 #endif

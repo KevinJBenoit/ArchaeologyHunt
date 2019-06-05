@@ -5,7 +5,7 @@
 ** Description: The implementation file for the Game class.
 *****************************************************************************/
 
-#define ROUNDS 30
+#define ROUNDS 50
 
 #include "Game.hpp"
 #include "menus.hpp"
@@ -19,6 +19,7 @@
 #include "OrnamentSpace.hpp"
 #include "Gem.hpp"
 #include "ArtifactItem.hpp"
+#include "TheEye.hpp"
 #include "inputValidate.hpp"
 #include <algorithm>
 
@@ -153,7 +154,6 @@ Returns: none
 ***************************************/
 void Game::round()
 {
-    std::cout << std::endl << std::endl << std::endl << std::endl;
     //move token and generate space event
     movePlayer();
 
@@ -170,7 +170,7 @@ void Game::round()
     //print board
     printBoard();
     
-    std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
+
     timer--;
 }
 
@@ -521,7 +521,7 @@ void Game::dig(char type)
         //add to player's inventory
         user.addToBackpack(new Gem());
         //increase the player's score
-        user.adjustScore(100);
+        //user.adjustScore(100);
     }
 
     //if ArtifactSpace
@@ -547,31 +547,99 @@ void Game::dig(char type)
     //if ShopSpace
     else if (type == 'S')
     {
+        purchase();
 
-        int option = itemMenu();
-        //menu function
-        if (option == 1)
-        {
-            //purchase The Eye of Horace
-        }
-        else if (option == 2)
-        {
-            //purchase The Map
-        }
-        else if (option == 3)
-        {
-            //purchase The Tent
-        }
-        else if (option == 4)
-        {
-            std::cout << "Fine, keep your money. ";
-        }
 
+        std::cout << std::endl << std::endl;
         std::cout << "Just so you know, the door locks on your way out! MUAHAHA"
-            << std::endl << std::endl;
+            << std::endl << std::endl << std::endl;
 
         //"lock" the Shop
         shopOpen = false;
         head[9]->setBottom(nullptr);
     }
+}
+
+
+
+
+/*****************************************
+Function for the user to add Items to their
+inventory from the ShopSpace.
+
+******************************************/
+void Game::purchase()
+{
+
+    int option = itemMenu();
+    //menu function
+    if (option == 1)
+    {
+        //user can't afford The Eye
+        if (user.getScore() < 300)
+        {
+            std::cout << "Sorry, you can't afford The Eye" << std::endl
+                << std::endl;
+            purchase();
+        }
+        //user can't carry The Eye
+        else if (user.getHeaviness() > 7)
+        {
+            std::cout << "Sorry, you can't carry The Eye" << std::endl;
+            int drop = dropMenu();
+            if (drop == 1)
+            {
+                playerDrop();
+            }
+
+
+            purchase();
+        }
+        else
+        {
+            std::cout << "Thank you for your business!" << std::endl;
+            user.addToBackpack(new TheEye());//purchase The Eye of Horace
+        }
+
+    }
+    else if (option == 2)
+    {
+        //purchase The Map
+    }
+    else if (option == 3)
+    {
+        //purchase The Tent
+    }
+    else if (option == 4)
+    {
+        std::cout << "Fine, keep your money. ";
+    }
+}
+
+
+/*****************************************
+Menu for allowing the player to drop items
+from their backpack. Lowers the heaviness
+and score
+*****************************************/
+void Game::playerDrop()
+{
+    std::cout << "How many would you like to drop?: " 
+        << "0 to " << user.getGemCount() << std::endl;
+        int number = inputValidateIntegerAndRange(0, user.getGemCount());
+
+    user.dropGem();
+
+    std::cout << "Current Weight: " << user.getHeaviness() << "/10" << std::endl
+        << std::endl;
+    std::cout << "Would you like to drop more gems?" << std::endl;
+    std::cout << "1. Yes" << std::endl;
+    std::cout << "2. No" << std::endl;
+    int option = inputValidateIntegerAndRange(1, 2);
+    if (option == 1)
+    {
+        playerDrop();
+    }
+
+    return;
 }

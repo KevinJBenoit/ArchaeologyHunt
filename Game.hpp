@@ -32,6 +32,8 @@ class Game
         Player user;
         Space * shop;
 
+        void purchase();
+        void playerDrop();
         bool gameOver;
         int endConditions;
         bool shopOpen = false;

@@ -13,6 +13,7 @@
 #include "Game.hpp"
 
 int itemMenu();
+int dropMenu();
 
 void finalMenu1();
 void finalMenu2_1();

@@ -20,14 +20,14 @@ Returns int option
 ***************************************/
 int itemMenu()
 {
-    std::cout << "1. The Eye of Horace - 300 points" << std::endl;
+    std::cout << "1. The Eye of Horace - 300 points - 3 heaviness" << std::endl;
     std::cout << "The Eye will reveal where the Mummy is buried." << std::endl;
     std::cout << "______________________________________________" << std::endl;
-    std::cout << "2. A Map of the Area - 200 points" << std::endl;
+    std::cout << "2. A Map of the Area - 200 points - 2 heaviness" << std::endl;
     std::cout << "The Map will remove some of the false digging sites"
         << std::endl;
     std::cout << "______________________________________________" << std::endl;
-    std::cout << "3. A Tent - 100 points" << std::endl;
+    std::cout << "3. A Tent - 100 points - 1 heaviness " << std::endl;
     std::cout << "The Tent will add some additional steps to the timer"
         << std::endl;
     std::cout << "______________________________________________" << std::endl;
@@ -35,10 +35,31 @@ int itemMenu()
     std::cout << "Keep your money, it may be the difference to achieve "
         << "your true goal!" << std::endl;
     std::cout << "______________________________________________" << std::endl;
+    std::cout << std::endl;
 
     int option = inputValidateIntegerAndRange(1, 4);
     return option;
 }
+
+
+/**************************************
+Menu to prompt the user to drop an
+Item from the backpack
+Calls:inputValidateIntegerAndRange()
+Returns int option
+***************************************/
+int dropMenu()
+{
+    std::cout << "Would you like to drop some Items?" << std::endl;
+    std::cout << "1. Yes" << std::endl;
+    std::cout << "2. No" << std::endl;
+    int option = inputValidateIntegerAndRange(1, 2);
+    
+    return option;
+}
+
+
+
 
 
 /**************************************
