@@ -116,7 +116,7 @@ void Player::dropGem()
             {
                 heaviness -= backpack.at(i)->getWeight();
                 //drop the gem
-                delete backpack.at(i); //***********************************************CHECK HERE
+                delete backpack.at(i);
                 backpack.erase(backpack.begin() + i);
                 score -= 100;
                 

@@ -50,7 +50,7 @@ Returns int option
 ***************************************/
 int dropMenu()
 {
-    std::cout << "Would you like to drop some Items?" << std::endl;
+    std::cout << "Would you like to drop some Gems?" << std::endl;
     std::cout << "1. Yes" << std::endl;
     std::cout << "2. No" << std::endl;
     int option = inputValidateIntegerAndRange(1, 2);

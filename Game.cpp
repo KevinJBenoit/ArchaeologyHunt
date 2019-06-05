@@ -20,6 +20,8 @@
 #include "Gem.hpp"
 #include "ArtifactItem.hpp"
 #include "TheEye.hpp"
+#include "TheMap.hpp"
+#include "TheTent.hpp"
 #include "inputValidate.hpp"
 #include <algorithm>
 
@@ -380,7 +382,7 @@ board.
 void Game::printBoard()
 {
     Space * cursorSpace;
-
+    std::cout << "Steps Left: " << timer << std::endl;
     for (int i = 0; i < 12; i++)
     {
         if (i == 1)
@@ -570,9 +572,9 @@ inventory from the ShopSpace.
 ******************************************/
 void Game::purchase()
 {
-
     int option = itemMenu();
-    //menu function
+
+    //purchose The Eye
     if (option == 1)
     {
         //user can't afford The Eye
@@ -582,6 +584,7 @@ void Game::purchase()
                 << std::endl;
             purchase();
         }
+
         //user can't carry The Eye
         else if (user.getHeaviness() > 7)
         {
@@ -592,23 +595,130 @@ void Game::purchase()
                 playerDrop();
             }
 
-
             purchase();
         }
+
+        //able to purchase
         else
         {
             std::cout << "Thank you for your business!" << std::endl;
             user.addToBackpack(new TheEye());//purchase The Eye of Horace
+            //pay
+            for (int i = 0; i < 3; i++)
+            {
+                user.dropGem();
+            }
+
+            //find the MummySpace node and change it's token
+            for (int i = 0; i < static_cast<int>(nodes.size()); i++)
+            {
+                if (nodes.at(i)->getType() == 'M')
+                {
+                    nodes.at(i)->setToken('M');
+                }
+            }
         }
 
     }
+    //purchase The Map
     else if (option == 2)
     {
-        //purchase The Map
+        //user can't afford The Map
+        if (user.getScore() < 200)
+        {
+            std::cout << "Sorry, you can't afford The Map" << std::endl
+                << std::endl;
+            purchase();
+        }
+
+        //user can't carry The Map
+        else if (user.getHeaviness() > 8)
+        {
+            std::cout << "Sorry, you can't carry The Map" << std::endl;
+            int drop = dropMenu();
+            if (drop == 1)
+            {
+                playerDrop();
+            }
+
+            purchase();
+        }
+
+        //able to purchase
+        else
+        {
+            std::cout << "Thank you for your business!" << std::endl;
+            user.addToBackpack(new TheMap());//purchase The Map
+            //pay
+            for (int i = 0; i < 2; i++)
+            {
+                user.dropGem();
+            }
+
+            //find 5 EmptySpaces nodes and change their token
+            for (int i = 0; i < 5; i++)
+            {
+                //start from the top down
+                if (i % 2 == 0)
+                {
+                    for (int i = 0; i < static_cast<int>(nodes.size()); i++)
+                    {
+                        if (nodes.at(i)->getType() == 'E')
+                        {
+                            nodes.at(i)->setToken(' ');
+                        }
+                    }
+                }
+                //start from the bottom up
+                else
+                {
+                    for (int i = static_cast<int>(nodes.size())-1; i >= 0; i--)
+                    {
+                        if (nodes.at(i)->getType() == 'E')
+                        {
+                            nodes.at(i)->setToken(' ');
+                        }
+                    }
+                }
+            }
+        }
     }
+
+    //purchase The Tent
     else if (option == 3)
     {
-        //purchase The Tent
+        //user can't afford The Tent
+        if (user.getScore() < 100)
+        {
+            std::cout << "Sorry, you can't afford The Tent" << std::endl
+                << std::endl;
+            purchase();
+        }
+
+        //user can't carry The Map
+        else if (user.getHeaviness() > 9)
+        {
+            std::cout << "Sorry, you can't carry The Tent" << std::endl;
+            int drop = dropMenu();
+            if (drop == 1)
+            {
+                playerDrop();
+            }
+
+            purchase();
+        }
+
+        //able to purchase
+        else
+        {
+            std::cout << "Thank you for your business!" << std::endl;
+            user.addToBackpack(new TheTent());//purchase The Tent
+            //pay
+            user.dropGem();
+
+            //add time to the timer
+            timer += 10;
+        }
     }
     else if (option == 4)
     {

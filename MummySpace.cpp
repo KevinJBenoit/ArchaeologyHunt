@@ -15,7 +15,7 @@ MummySpace object. Inherits from Space
 ***************************************/
 MummySpace::MummySpace() : Space()
 {
-    token = 'M';
+    token = 'x';
     type = 'M';
 }
 
