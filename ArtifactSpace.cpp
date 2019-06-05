@@ -30,8 +30,8 @@ void ArtifactSpace::spaceEvent()
 {
     std::cout << "Just as you are about to give up digging, you hear a *clang*"
         << std::endl
-        << " as your shovel hits the ground. You wipe the loose sand away from"
-        << std::endl
+        << " as your shovel hits the ground." << std::endl
+        << "You wipe the loose sand away from"
         << " an ornate box. You open it up and see the unmistakable engravings"
         << std::endl
         << " of the Pharaoh's ancient language. You have found your prize!"

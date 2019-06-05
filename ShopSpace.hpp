@@ -15,10 +15,17 @@
 class ShopSpace : public Space
 {
 
+<<<<<<< HEAD
 public:
     ShopSpace();
 
     void spaceEvent();
+=======
+    public:
+        ShopSpace();
+
+        void spaceEvent();
+>>>>>>> feat/MummySpace
 };
 
 #endif

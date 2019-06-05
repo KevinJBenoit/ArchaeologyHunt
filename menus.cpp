@@ -48,7 +48,8 @@ losing scenario
 
 void finalMenu1()
 {
-    std::cout << "Game Over - lose;" << std::endl;
+    std::cout << "Game Over - You uncoverd the Mummy;" << std::endl;
+    //insert ascii art
 }
 
 /**************************************
