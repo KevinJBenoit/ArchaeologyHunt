@@ -5,14 +5,12 @@
 ** Description: The implementation file for the derived Gem class.
 *****************************************************************************/
 
-
 #include "Gem.hpp"
-
 
 
 /**********************************
 Default constructor. Creats a Gem
-object. Scoped to Item
+object. Inherits from Item
 **********************************/
 Gem::Gem() : Item()
 {

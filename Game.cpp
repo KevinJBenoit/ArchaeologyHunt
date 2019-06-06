@@ -53,6 +53,7 @@ Game::Game()
 
     for (int i = 0; i < 78; i++)
     {
+        //Credit: cplusplus.com/forum/general/157242/
         nodes.emplace_back(new BlankSpace);
     }
 
@@ -75,7 +76,7 @@ Game::Game()
         std::iter_swap(nodes.begin() + 90, nodes.begin() + 91);
     }
     
-    //place the ExitSpace at the end so it isn't used in board generation
+    //place the Shop and ExitSpace at the end so it isn't used in board generation
     nodes.emplace_back(new ExitSpace);
     //place a ShopSpace
     nodes.emplace_back(new ShopSpace);
@@ -88,7 +89,7 @@ Game::Game()
 
 /*****************************************
 Destructor. Frees memory allocated
-during the game
+during the game by the Linked List board
 *****************************************/
 Game::~Game()
 {
@@ -96,7 +97,6 @@ Game::~Game()
     {
         delete nodes.at(i);
     }
-
 }
 
 
@@ -104,7 +104,7 @@ Game::~Game()
 Function that sets up the conditions for
 the game. Creates the board and outputs
 opening text.
-Calls:createBoard()
+Calls:createBoard(), printBoard()
 Rturns: none
 ***************************************/
 void Game::setup()
@@ -113,6 +113,7 @@ void Game::setup()
     bool startFound = false;
     int counter = 0;
     int headCounter = 0;
+
     //generate the board design
     createBoard();
 
@@ -154,13 +155,11 @@ void Game::setup()
 
 
 
-
-
 /*************************************
 Function that runs one round of the
 game. Player is able move around the board
 through validated input
-Calls: movePlayer(), printBoard()
+Calls: movePlayer(), printBoard() printScore()
 Returns: none
 ***************************************/
 void Game::round()
@@ -193,7 +192,7 @@ void Game::round()
 Function that moves the player 1 space. 
 Player is able move around the board
 except past the borders.
-Calls: inputValidateCharArray()
+Calls: inputValidateCharArray(), dig()
 Returns: none
 ***************************************/
 void Game::movePlayer()
@@ -273,9 +272,10 @@ void Game::movePlayer()
 }
 
 /***********************************
-Function that creates the 2D Doubly Linked
+Function that creates the 2D Quadruple Linked
 List of Spaces that represents the board.
 Will be navigatable by the player.
+Calls: class Space* functions
 ************************************/
 void Game::createBoard()
 {
@@ -317,10 +317,10 @@ void Game::createBoard()
     Space * bottomCursor;
     Space * topCursor;
 
-    /************************
+    /***********************
     link the bottom pointers 
     exclude the bottom row
-    *************************/
+    ************************/
     for (int i = 0; i < 9; i++)
     {
         cursorSpace = head[i];
@@ -389,8 +389,9 @@ void Game::createBoard()
 
 /*************************************
 Function that outputs to the console the
-current state of the 2D DoublyLinked List/
+current state of the 2D Quadruple LinkedList/
 board.
+Calls: class Space* functions
 ***************************************/
 void Game::printBoard()
 {
@@ -430,7 +431,7 @@ void Game::printBoard()
         {
             switch (shopOpen)  
             {
-            case true: std::cout << nodes.at(101)->getToken(); //if changing board size fix this*********************************
+            case true: std::cout << nodes.at(101)->getToken();
                 break;
             case false: std::cout << '-';
             }
@@ -452,14 +453,13 @@ void Game::printBoard()
 
 
 /*****************************************
-Function that outputs the current score
-of the user
+Function that outputs the current score, 
+Items in the backpack, and weight of the
+backpack of the user.
 *****************************************/
 void Game::printScore()
 {
     std::cout << "Score: " << user.getScore() << std::endl;
-    //print the backpack
-
     std::cout << "Backpack: ";
     std::cout << "Encumbrance: " << user.getHeaviness() << "/10"
         << std::endl;
@@ -503,7 +503,6 @@ bool Game::getGameOver()
     return gameOver;
 }
 
-
 /*****************************************
 Getter function for accessing the Player's
 score variable
@@ -514,10 +513,11 @@ int Game::getScore()
     return user.getScore();
 }
 
-
 /*****************************************
 Function for resolving Space Events.
 Calls: Space::spaceEvent()
+Player::addToBackpack, dropGem()
+Game::purchase()
 Returns: none
 ******************************************/
 void Game::dig(char type)
@@ -597,7 +597,9 @@ void Game::dig(char type)
 /*****************************************
 Function for the user to add Items to their
 inventory from the ShopSpace.
-
+Calls: itemMenu(), dropMenu()
+Player::dropGem(), addToBackpack()
+Game::purchase, playerDrop()
 ******************************************/
 void Game::purchase()
 {
@@ -631,7 +633,7 @@ void Game::purchase()
         else
         {
             std::cout << "Thank you for your business!" << std::endl;
-            user.addToBackpack(new TheEye);//purchase The Eye of Horace
+            user.addToBackpack(new TheEye);
             //pay
             for (int i = 0; i < 3; i++)
             {
@@ -677,7 +679,7 @@ void Game::purchase()
         else
         {
             std::cout << "Thank you for your business!" << std::endl;
-            user.addToBackpack(new TheMap);//purchase The Map
+            user.addToBackpack(new TheMap);
             //pay
             for (int i = 0; i < 2; i++)
             {
@@ -741,7 +743,7 @@ void Game::purchase()
         else
         {
             std::cout << "Thank you for your business!" << std::endl;
-            user.addToBackpack(new TheTent);//purchase The Tent
+            user.addToBackpack(new TheTent);
             //pay
             user.dropGem();
 
@@ -760,6 +762,9 @@ void Game::purchase()
 Menu for allowing the player to drop items
 from their backpack. Lowers the heaviness
 and score
+Calls: Player::dropGem()
+Game::playerDrop()
+inputValidateIntegerAndRange()
 *****************************************/
 void Game::playerDrop()
 {

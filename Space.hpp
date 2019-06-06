@@ -4,8 +4,8 @@
 ** Date: 5/31/2019
 ** Description: Contains the class declaration for the base abastract Space
     class. Each Space represents a node structure with pointers to Spaces
-    above, bellow, left, and right of it. The data contents will be a base 
-    class Item pointer. Virtual and pure vitrual functions will be inherited
+    above, bellow, left, and right of it. The data contents will be chars 
+    token and type. Virtual and pure vitrual functions will be inherited
     by the derived classes.
 *****************************************************************************/
 
@@ -23,7 +23,6 @@ class Space
         Space * bottom;
         Space * left;
         Space * right;
-        //Item * content;
         char token;
         char type;
     
@@ -39,9 +38,6 @@ class Space
         virtual char getToken();
         virtual void setToken(char tokenIn);
         virtual char getType();
-
-        //virtual Item* getContent();
-
 
         Space();
         virtual ~Space();

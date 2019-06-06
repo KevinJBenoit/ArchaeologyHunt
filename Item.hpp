@@ -4,7 +4,7 @@
 ** Date: 5/31/2019
 ** Description: Contains the class declaration for the base Item class. Each
     Item represents something that the player can put into their inventory.
-    Each Item has has a integer price and string name. Virtual functions will
+    Each Item has has a integer weight and string name. Virtual functions will
     also be inherited by derived classes.
 *****************************************************************************/
 

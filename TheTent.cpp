@@ -2,7 +2,7 @@
 ** Program name: TheTent.cpp
 ** Author: Kevin Benoit
 ** Date: 6/05/2019
-** Description: The implementation file for the derived TheMap class.
+** Description: The implementation file for the derived TheTent class.
 *****************************************************************************/
 
 

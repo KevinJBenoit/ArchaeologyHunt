@@ -18,7 +18,9 @@ Item::Item()
     name = "InvalidItem";
 }
 
-
+/**********************************
+Virtual destructor to be inherited
+**********************************/
 Item::~Item()
 {
 }
@@ -31,7 +33,6 @@ int Item::getWeight()
 {
     return weight;
 }
-
 
 /*************************************
 Getter function for accessing this Item's

@@ -9,7 +9,6 @@
 #include "ArtifactItem.hpp"
 
 
-
 /**********************************
 Default constructor. Creats a Gem
 object. Scoped to Item

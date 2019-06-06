@@ -13,6 +13,7 @@
 /**********************************
 Default Constructor. Creates a
 BlankSpace on the board.
+Inherits from Space
 **********************************/
 BlankSpace::BlankSpace() : Space()
 {

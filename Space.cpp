@@ -9,7 +9,6 @@
 #include "Space.hpp"
 
 
-
 /***************************************
 Default Constructor. Used to create
 an empty Space.
@@ -20,7 +19,6 @@ Space::Space()
     bottom = nullptr;
     left = nullptr;
     right = nullptr;
-    //content = nullptr;
     token = 'N';
     type = 'N';
 }
@@ -122,12 +120,3 @@ char Space::getType()
 {
     return type;
 }
-
-
-/**************************************
-Getter function for this Space's content
-***************************************/
-//Item* Space::getContent()
-//{
-//    return content;
-//}

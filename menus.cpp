@@ -3,8 +3,8 @@
 ** Author: Kevin Benoit
 ** Date: 6/02/2019
 ** Description: Contains the definitions for the menu functions. All menus
-    will use integers > 1 to select the desired option. Inputs will be validated through
-    inputValidate.hpp functions to ensure correct input.
+    will use integers > 1 to select the desired option if applicable. Inputs will be 
+    validated through inputValidate.hpp functions to ensure correct input.
 ****************************************************************************************/
 
 #include <iostream>
@@ -32,7 +32,7 @@ int itemMenu()
         << std::endl;
     std::cout << "______________________________________________" << std::endl;
     std::cout << "4. Nothing" << std::endl;
-    std::cout << "Keep your money, it may be the difference to achieve "
+    std::cout << "Keep your money, it may be the difference in order to achieve "
         << "your true goal!" << std::endl;
     std::cout << "______________________________________________" << std::endl;
     std::cout << std::endl;
@@ -59,9 +59,6 @@ int dropMenu()
 }
 
 
-
-
-
 /**************************************
 Menu for outputing the text for the 
 losing scenario from the Mummy
@@ -69,7 +66,6 @@ losing scenario from the Mummy
 void finalMenu1_1()
 {
     std::cout << "Game Over - You uncoverd the Mummy;" << std::endl;
-    //insert ascii art
 }
 
 /**************************************
@@ -93,7 +89,7 @@ void finalMenu2_1()
 
 /**************************************
 Menu for outputing the text for the
-neutral scenario
+neutral scenario with some positive score
 ***************************************/
 void finalMenu2_2()
 {

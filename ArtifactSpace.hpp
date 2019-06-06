@@ -5,7 +5,7 @@
 ** Description: Contains the class declaration for the derived ArtifactSpace
     class. A ArtifactSpace inherits from the parent Space class.
     An ArtifactSpace will be marked on the board as a dig site but will
-    fulfill the necessary condition for a successful GameOver.
+    fulfill the necessary condition for a successful gameOver.
 *****************************************************************************/
 
 #ifndef ARTIFACTSPACE_HPP

@@ -1,5 +1,5 @@
 /******************************************************************************
-** Program name: MummySpace.hpp
+** Program name: MummySpace.cpp
 ** Author: Kevin Benoit
 ** Date: 6/04/2019
 ** Description: The implementation file for the derived MummySpace class.

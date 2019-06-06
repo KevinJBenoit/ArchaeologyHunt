@@ -7,18 +7,16 @@
 *****************************************************************************/
 
 #include "ArtifactSpace.hpp"
-#include "Gem.hpp"
 #include <iostream>
 
 /***********************************
 Default constructor. Inherits from
-Space. It's token is set to a mimic 'x'.
+Space.
 ***********************************/
 ArtifactSpace::ArtifactSpace() : Space()
 {
     token = 'x';
     type = 'P';
-    //content = new Gem(); //****************************************************************potential memory leak??????
 }
 
 

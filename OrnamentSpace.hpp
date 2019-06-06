@@ -4,8 +4,9 @@
 ** Date: 6/03/2019
 ** Description: Contains the class declaration for the derived OrnamentSpace
     class. Each OrnamentSpace inherits from the parent Space class. 
-    An OrnamentSpace will be marked on the board as a dig site but will 
-    add points to the player's score that can be used to purchase items.
+    An OrnamentSpace will be marked on the board as a dig site and will 
+    add points to the player's score that can be used to purchase items
+    along with some weight to the heaviness of the backpack container.
 *****************************************************************************/
 
 #ifndef ORNAMENTSPACE_HPP

@@ -3,7 +3,7 @@
 ** Author: Kevin Benoit
 ** Date: 6/04/2019
 ** Description: Contains the class declaration for the derived ShopSpace
-    class. The ShopSpace will allow the player to purchase items with points
+    class. The ShopSpace will allow the Player to purchase items with points
     and add them to their backpack container
 *****************************************************************************/
 

@@ -3,12 +3,12 @@
 ** Author: Kevin Benoit
 ** Date: 5/31/2019
 ** Description: Runs the FinalProject - Archaelogy Hunt game. A 2D 
-    DoublyLinkedList structure will be used as the basis of the program, where 
+    QuadrupleLinkedList structure will be used as the basis of the program, where 
     each Node will contain a Space * to a derived Space class that affects the
     game in some way. The player will be the cursor and be able to move around
     the board with WASD keys. Unused boundaries will be set to nullptr.
     A separate Player class will keep track of the score and the players
-    inventory of items using a <stack>.
+    inventory of items using a <vector>.
     The time limit will be implemented by limiting the number of steps the
     player can take.
     The Menu functions will be held by the Game class which runs the game.
@@ -46,6 +46,7 @@ int main()
     {
         finalMenu1_2(); //losing end timer
     }
+
     else if (ending == 0)
     {
         if (game1.getScore() > 0)

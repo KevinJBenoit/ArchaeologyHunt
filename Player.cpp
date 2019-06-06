@@ -8,8 +8,6 @@
 #include "Player.hpp"
 
 
-
-
 /************************************
 Default constructor. Creates a Player
 object
@@ -67,11 +65,10 @@ std::vector<Item*> Player::getBackpack()
 }
 
 
-
 /************************************
 Function for adding an Item to the Players
 inventory container. Will also increase the
-heaviness. IMPLEMENT WEIGHT CHECK HERE??????????????????????????????????????????????????????????????
+heaviness.
 *************************************/
 void Player::addToBackpack(Item* thing)
 {
@@ -87,13 +84,18 @@ void Player::addToBackpack(Item* thing)
 /*************************************
 Getter function for accessing the Player's
 heaviness.
+Returns int heaviness
 **************************************/
 int Player::getHeaviness()
 {
     return heaviness;
 }
 
-
+/************************************
+Getter function for accessing the
+number of Gems in the Player's backpack
+returns int gemCount
+************************************/
 
 int Player::getGemCount()
 {
@@ -103,7 +105,7 @@ int Player::getGemCount()
 
 
 /*************************************
-Function for dropping an Item from the
+Function for dropping one Gem from the
 backpack container
 **************************************/
 void Player::dropGem()

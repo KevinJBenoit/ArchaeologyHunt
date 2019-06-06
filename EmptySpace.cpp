@@ -11,7 +11,7 @@
 
 /***********************************
 Default constructor. Inherits from
-Space. It's token is set to a mimic 'x'.
+Space.
 ***********************************/
 EmptySpace::EmptySpace() : Space()
 {
