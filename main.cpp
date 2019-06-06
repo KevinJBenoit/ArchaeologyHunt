@@ -38,9 +38,13 @@ int main()
     //check for which endConditions
     ending = game1.getEndConditions();
 
-    if (ending < 0)
+    if (ending < -10)
     {
-        finalMenu1(); //losing end
+        finalMenu1_1(); //losing end Mummy
+    }
+    else if (ending == -5)
+    {
+        finalMenu1_2(); //losing end timer
     }
     else if (ending == 0)
     {
@@ -56,7 +60,7 @@ int main()
     }
     else if (ending == 1)
     {
-        if (game1.getScore() > 500)
+        if (game1.getScore() >= 700)
         {
             finalMenu4();//true win end
         }

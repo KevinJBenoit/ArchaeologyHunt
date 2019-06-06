@@ -5,7 +5,7 @@
 ** Description: The implementation file for the Game class.
 *****************************************************************************/
 
-#define ROUNDS 50
+#define ROUNDS 60
 
 #include "Game.hpp"
 #include "menus.hpp"
@@ -174,6 +174,11 @@ void Game::round()
     
 
     timer--;
+    if (timer < 0)
+    {
+        gameOver = true;
+        endConditions = -5;
+    }
 }
 
 /*************************************
@@ -520,15 +525,31 @@ void Game::dig(char type)
     //if OrnamentSpace
     else if (type == 'O') 
     {
-        //add to player's inventory
-        user.addToBackpack(new Gem());
-        //increase the player's score
-        //user.adjustScore(100);
+        if (user.getHeaviness() == 10)
+        {
+            std::cout << "You can only carry so much. Unfortunately you have "
+                << "to leave this Gem behind" << std::endl;
+        }
+        else
+        {
+            //add to player's inventory
+            user.addToBackpack(new Gem());
+        }
     }
 
     //if ArtifactSpace
     else if (type == 'P')
     {
+        if (user.getHeaviness())
+        {
+            int difference = user.getHeaviness() - 7;
+            std::cout << "You found your prize! However you have to drop "
+                << difference << " Gems in order to carry it" << std::endl;
+            for (int i = 0; i < difference; i++)
+            {
+                user.dropGem();
+            }
+        }
         user.addToBackpack(new ArtifactItem());
         endConditions++;
     }

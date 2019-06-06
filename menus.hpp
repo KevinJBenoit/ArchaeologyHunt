@@ -15,7 +15,8 @@
 int itemMenu();
 int dropMenu();
 
-void finalMenu1();
+void finalMenu1_1();
+void finalMenu1_2();
 void finalMenu2_1();
 void finalMenu2_2();
 void finalMenu3();

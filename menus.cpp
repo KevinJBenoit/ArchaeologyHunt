@@ -64,13 +64,22 @@ int dropMenu()
 
 /**************************************
 Menu for outputing the text for the 
-losing scenario
+losing scenario from the Mummy
 ***************************************/
-
-void finalMenu1()
+void finalMenu1_1()
 {
     std::cout << "Game Over - You uncoverd the Mummy;" << std::endl;
     //insert ascii art
+}
+
+/**************************************
+Menu for outputing the text for the
+losing scenario from the timer
+***************************************/
+void finalMenu1_2()
+{
+    std::cout << "Game Over - You collapse from exhaustion in the desert." << std::endl;
+
 }
 
 /**************************************
