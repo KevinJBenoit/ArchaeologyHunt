@@ -18,6 +18,7 @@ Player::Player()
 {
     score = 0;
     heaviness = 0;
+    gemCount = 0;
 }
 
 /*************************************
@@ -74,6 +75,11 @@ heaviness. IMPLEMENT WEIGHT CHECK HERE??????????????????????????????????????????
 *************************************/
 void Player::addToBackpack(Item* thing)
 {
+    if (thing->getName() == "Gem")
+    {
+        gemCount++;
+        score += 100;
+    }
     backpack.push_back(thing);
     heaviness += thing->getWeight();
 }
@@ -85,4 +91,38 @@ heaviness.
 int Player::getHeaviness()
 {
     return heaviness;
+}
+
+
+
+int Player::getGemCount()
+{
+    return gemCount;
+}
+
+
+
+/*************************************
+Function for dropping an Item from the
+backpack container
+**************************************/
+void Player::dropGem()
+{
+    if (gemCount > 0)
+    {
+        for (int i = 0; i < static_cast<int>(backpack.size()); i++)
+        {
+            if (backpack.at(i)->getName() == "Gem")
+            {
+                heaviness -= backpack.at(i)->getWeight();
+                //drop the gem
+                delete backpack.at(i);
+                backpack.erase(backpack.begin() + i);
+                score -= 100;
+                
+                //exit the function
+                return;
+            }
+        }
+    }
 }
