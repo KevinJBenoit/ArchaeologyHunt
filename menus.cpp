@@ -27,7 +27,7 @@ int itemMenu()
     std::cout << "The Map will remove some of the false digging sites"
         << std::endl;
     std::cout << "______________________________________________" << std::endl;
-    std::cout << "3. A Tent - 100 points - 1 heaviness " << std::endl;
+    std::cout << "3. A Tent with water to rest under some shade - 100 points - 1 heaviness " << std::endl;
     std::cout << "The Tent will add some additional steps to the timer"
         << std::endl;
     std::cout << "______________________________________________" << std::endl;

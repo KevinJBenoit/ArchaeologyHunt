@@ -42,25 +42,25 @@ Game::Game()
     for (int i = 0; i < 10; i++)
     {
         //Credit: cplusplus.com/forum/general/157242/
-        nodes.emplace_back(new EmptySpace());
+        nodes.emplace_back(new EmptySpace);
     }
 
     for (int i = 0; i < 10; i++)
     {
         //Credit: cplusplus.com/forum/general/157242/
-        nodes.emplace_back(new OrnamentSpace());
+        nodes.emplace_back(new OrnamentSpace);
     }
 
     for (int i = 0; i < 78; i++)
     {
-        nodes.emplace_back(new BlankSpace());
+        nodes.emplace_back(new BlankSpace);
     }
 
     //generate the winning space
-    nodes.emplace_back(new ArtifactSpace());
+    nodes.emplace_back(new ArtifactSpace);
 
     //generate the losing space
-    nodes.emplace_back(new MummySpace());
+    nodes.emplace_back(new MummySpace);
 
 
     //shuffle the spaces
@@ -76,9 +76,9 @@ Game::Game()
     }
     
     //place the ExitSpace at the end so it isn't used in board generation
-    nodes.emplace_back(new ExitSpace());
+    nodes.emplace_back(new ExitSpace);
     //place a ShopSpace
-    nodes.emplace_back(new ShopSpace());
+    nodes.emplace_back(new ShopSpace);
 
     gameOver = false;
     endConditions = 0;
@@ -541,7 +541,7 @@ void Game::dig(char type)
         else
         {
             //add to player's inventory
-            user.addToBackpack(new Gem());
+            user.addToBackpack(new Gem);
         }
     }
 
@@ -558,7 +558,7 @@ void Game::dig(char type)
                 user.dropGem();
             }
         }
-        user.addToBackpack(new ArtifactItem());
+        user.addToBackpack(new ArtifactItem);
         endConditions++;
     }
 
@@ -603,7 +603,7 @@ void Game::purchase()
 {
     int option = itemMenu();
 
-    //purchose The Eye
+    //purchase The Eye
     if (option == 1)
     {
         //user can't afford The Eye
@@ -631,7 +631,7 @@ void Game::purchase()
         else
         {
             std::cout << "Thank you for your business!" << std::endl;
-            user.addToBackpack(new TheEye());//purchase The Eye of Horace
+            user.addToBackpack(new TheEye);//purchase The Eye of Horace
             //pay
             for (int i = 0; i < 3; i++)
             {
@@ -677,7 +677,7 @@ void Game::purchase()
         else
         {
             std::cout << "Thank you for your business!" << std::endl;
-            user.addToBackpack(new TheMap());//purchase The Map
+            user.addToBackpack(new TheMap);//purchase The Map
             //pay
             for (int i = 0; i < 2; i++)
             {
@@ -741,7 +741,7 @@ void Game::purchase()
         else
         {
             std::cout << "Thank you for your business!" << std::endl;
-            user.addToBackpack(new TheTent());//purchase The Tent
+            user.addToBackpack(new TheTent);//purchase The Tent
             //pay
             user.dropGem();
 
