@@ -65,6 +65,15 @@ Game::Game()
 
     //shuffle the spaces
     std::random_shuffle(nodes.begin(), nodes.end());
+    //make sure mummy doesnt spawn in front of exit or shop
+    if (nodes.at(0)->getType() == 'M')
+    {
+        std::iter_swap(nodes.begin() + 0, nodes.begin() + 1);
+    }
+    if (nodes.at(90)->getType() == 'M')
+    {
+        std::iter_swap(nodes.begin() + 90, nodes.begin() + 91);
+    }
     
     //place the ExitSpace at the end so it isn't used in board generation
     nodes.emplace_back(new ExitSpace());
