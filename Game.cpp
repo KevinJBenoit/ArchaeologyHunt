@@ -177,7 +177,6 @@ void Game::round()
     if (timer < 0)
     {
         gameOver = true;
-        endConditions = -5;
     }
 }
 
@@ -757,10 +756,13 @@ void Game::playerDrop()
 {
     std::cout << "How many would you like to drop?: " 
         << "0 to " << user.getGemCount() << std::endl;
-        int number = inputValidateIntegerAndRange(0, user.getGemCount());
+    int number = inputValidateIntegerAndRange(0, user.getGemCount());
 
-    user.dropGem();
-
+    for (int i = 0; i < number; i++)
+    {
+        user.dropGem();
+    }
+    
     std::cout << "Current Weight: " << user.getHeaviness() << "/10" << std::endl
         << std::endl;
     std::cout << "Would you like to drop more gems?" << std::endl;

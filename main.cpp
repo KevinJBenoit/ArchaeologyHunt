@@ -42,7 +42,7 @@ int main()
     {
         finalMenu1_1(); //losing end Mummy
     }
-    else if (ending == -5)
+    else if (game1.getTimer() <= 0)
     {
         finalMenu1_2(); //losing end timer
     }
