@@ -28,6 +28,6 @@ decides to end the Game
 *************************************/
 void ExitSpace::spaceEvent()
 {
-    std::cout << "You get in your car and leave a trail of dust in your wake"
-        << " as you drive away from the desert" << std::endl << std::endl;
+    std::cout << "You get in your car and leave a trail of dust in your wake" << std::endl;
+    std::cout << " as you drive away from the desert" << std::endl << std::endl;
 }

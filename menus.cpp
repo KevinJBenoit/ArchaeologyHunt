@@ -66,7 +66,7 @@ losing scenario from the Mummy
 ***************************************/
 void finalMenu1_1()
 {
-    std::cout << "You uncoverd the Mummy" << std::endl;
+    std::cout << "You uncovered the Mummy" << std::endl;
 
     //credit: www.asciiworld.com/-Death-Co-.html
     textMenu("loseMummy.txt");

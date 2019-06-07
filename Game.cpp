@@ -551,12 +551,18 @@ void Game::dig(char type)
         if (user.getHeaviness())
         {
             int difference = user.getHeaviness() - 7;
-            std::cout << "You found your prize! However you have to drop "
-                << difference << " Gems in order to carry it" << std::endl;
-            for (int i = 0; i < difference; i++)
+            //if more space is needed
+            if (difference > 0)
             {
-                user.dropGem();
+                std::cout << "You found your prize! However you have to drop "
+                    << difference << " Gems in order to carry it" << std::endl;
+
+                for (int i = 0; i < difference; i++)
+                {
+                    user.dropGem();
+                }
             }
+            
         }
         user.addToBackpack(new ArtifactItem);
         endConditions++;

@@ -26,7 +26,7 @@ decides to dig this space on the board.
 *************************************/
 void OrnamentSpace::spaceEvent()
 {
-    std::cout << "After hours of digging, you find a shiny jewel! | "
-        << "1 jewel added to the sack of money in the backpack, +100 points" 
+    std::cout << "After hours of digging, you find a shiny gem! | "
+        << "1 Gem added to the backpack, +100 points" 
         << std::endl << std::endl;
 }
