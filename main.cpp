@@ -23,8 +23,9 @@ int main()
     bool endGame = false;
     int ending;
 
-    Game game1 = Game();
+    textMenu("intro.txt");
 
+    Game game1 = Game();
     game1.setup();
 
     do

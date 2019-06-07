@@ -11,6 +11,7 @@
 #define MENUS_HPP
 
 #include "Game.hpp"
+#include <string>
 
 int itemMenu();
 int dropMenu();
@@ -22,4 +23,5 @@ void finalMenu2_2();
 void finalMenu3();
 void finalMenu4();
 
+void textMenu(std::string fileName);
 #endif

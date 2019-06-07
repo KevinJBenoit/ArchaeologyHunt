@@ -10,6 +10,7 @@
 #include <iostream>
 #include "inputValidate.hpp"
 #include "menus.hpp"
+#include <fstream>
 
 
 /**************************************
@@ -65,7 +66,10 @@ losing scenario from the Mummy
 ***************************************/
 void finalMenu1_1()
 {
-    std::cout << "Game Over - You uncoverd the Mummy;" << std::endl;
+    std::cout << "You uncoverd the Mummy" << std::endl;
+
+    //credit: www.asciiworld.com/-Death-Co-.html
+    textMenu("loseMummy.txt");
 }
 
 /**************************************
@@ -74,8 +78,7 @@ losing scenario from the timer
 ***************************************/
 void finalMenu1_2()
 {
-    std::cout << "Game Over - You collapse from exhaustion in the desert." << std::endl;
-
+    textMenu("loseTime.txt");
 }
 
 /**************************************
@@ -84,7 +87,7 @@ neutral scenario
 ***************************************/
 void finalMenu2_1()
 {
-    std::cout << "Game Over - nuetral no money" << std::endl;
+    textMenu("tieNoScore.txt");
 }
 
 /**************************************
@@ -93,7 +96,7 @@ neutral scenario with some positive score
 ***************************************/
 void finalMenu2_2()
 {
-    std::cout << "Game Over - nuetral some money" << std::endl;
+    textMenu("tieScore.txt");
 }
 
 /***************************************
@@ -102,7 +105,7 @@ win scenario
 ****************************************/
 void finalMenu3()
 {
-    std::cout << "Game Over - win;" << std::endl;
+    textMenu("winStandard.txt");
 }
 
 
@@ -112,5 +115,33 @@ Menu for outputing the text for the
 ********************************************/
 void finalMenu4()
 {
-    std::cout << "Game Over - true win;" << std::endl;
+    textMenu("winTrue.txt");
+}
+
+
+
+/******************************************
+Menu function that reads in text from a
+.txt file. 
+Takes filename and outputs
+to console
+******************************************/
+void textMenu(std::string fileName)
+{
+    std::ifstream ifs;
+    ifs.open(fileName);
+
+    if (ifs.fail())
+    {
+        std::cout << "Failed to open " << fileName << std::endl;
+        return;
+    }
+
+    std::string line;
+    while (getline(ifs, line))
+    {
+        std::cout << line << std::endl;
+    }
+
+    ifs.close();
 }

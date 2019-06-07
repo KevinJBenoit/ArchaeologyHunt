@@ -448,7 +448,7 @@ void Game::printBoard()
             std::cout << '-';
         }
     }
-    std::cout << std::endl;
+    std::cout << std::endl << std::endl;
 }
 
 
